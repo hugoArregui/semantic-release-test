@@ -19,7 +19,7 @@ before_script:
 
 script:
   - golangci-lint run ./...
-  - go test -coverpkg=$(go list ./... | tr '\n' ',') -coverprofile=cover.out -v -race -covermode=atomic ./...
+  - go test
 
 jobs:
   include:

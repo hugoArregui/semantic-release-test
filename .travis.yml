@@ -15,6 +15,9 @@ stages:
 
 before_script:
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | bash -s -- -b $GOPATH/bin v1.18.0
+  - echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"
+  - echo "TRAVIS_COMMIT_RANGE: $TRAVIS_COMMIT_RANGE"
+  - echo "TRAVIS_PULL_REQUEST: $TRAVIS_PULL_REQUEST"
   - go get -u github.com/hugoArregui/semantic-release/cmd/travis
 
 script:

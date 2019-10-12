@@ -16,23 +16,9 @@ stages:
 
 before_script:
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | bash -s -- -b $GOPATH/bin v1.18.0
+  - go get -u github.com/hugoArregui/semantic-release/cmd/travis
 
 script:
   - golangci-lint run ./...
-  - go test -coverpkg=$(go list ./... | tr '\n' ',') -coverprofile=cover.out -v -race -covermode=atomic ./...
-
-jobs:
-  include:
-    - stage: test
-    - stage: release
-      before_install: skip
-      before_script: skip
-      install: skip
-      script: skip
-      before_deploy:
-        - go get -u github.com/hugoArregui/semantic-release/cmd/travis
-        - echo $GOPATH
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script: "$GOPATH/bin/travis"
+  - go test
+  - $GOPATH/bin/travis
